@@ -1,0 +1,16 @@
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: cimg/openjdk:11.0.13
+    steps:
+      - checkout
+      - run:
+          name: "Run tests"
+          command: "gradle test"
+
+workflows:
+  test-app:
+    jobs:
+      - test
