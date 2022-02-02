@@ -9,10 +9,9 @@ services:
       PostgreSQL:
         condition: service_healthy
     environment:
-      - SPRING_DATASOURCE_URL=${JDBC_DATABASE_URL}
-#      - SPRING_DATASOURCE_URL=jdbc:postgresql://PostgreSQL:5432/postgres
-      - SPRING_DATASOURCE_USERNAME=${JDBC_DATABASE_USERNAME}
-      - SPRING_DATASOURCE_PASSWORD=${JDBC_DATABASE_PASSWORD}
+      - SPRING_DATASOURCE_URL=${DATABASE_URL}
+      - SPRING_DATASOURCE_USERNAME=${DATABASE_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${DATABASE_PASSWORD}
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
   PostgreSQL:
     image: 'postgres:13.1-alpine'
