@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+  API:
+    image: 'qr-code-generator-worker-server:latest'
+    ports:
+      - "4567:4567"
+    depends_on:
+      PostgreSQL:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=${JDBC_DATABASE_URL}
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://PostgreSQL:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=${JDBC_DATABASE_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${JDBC_DATABASE_PASSWORD}
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+  PostgreSQL:
+    image: 'postgres:13.1-alpine'
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=${POSTGRES_USERNAME}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=postgres
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
