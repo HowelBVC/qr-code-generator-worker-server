@@ -20,4 +20,9 @@ public class Controller {
     public Customer getCustomerById(@PathVariable Long customerId) {
         return repository.getById(customerId);
     }
+
+    @PostMapping("/customers")
+    public void addCustomer(@RequestBody Customer customer) {
+        repository.save(customer);
+    }
 }
