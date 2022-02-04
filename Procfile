@@ -1,0 +1,1 @@
+web: java -jar -Dspring.profiles.active=prod qr-code-generator-worker-server-0.0.1-SNAPSHOT.jar
